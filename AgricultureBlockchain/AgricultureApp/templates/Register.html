@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register - Blockchain Agriculture{% endblock %}
+
+{% block content %}
+<div class="min-h-[calc(100vh-200px)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg animate-fade-in">
+        <div>
+            <div class="flex justify-center">
+                <span class="w-20 h-20 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user-plus text-3xl text-primary-600 dark:text-primary-400"></i>
+                </span>
+            </div>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
+                Create your account
+            </h2>
+            <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+                Or
+                <a href="{% url 'Login' %}" class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+                    sign in to your existing account
+                </a>
+            </p>
+        </div>
+        
+        {% if data %}
+        <div class="rounded-md bg-red-50 dark:bg-red-900 p-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-circle text-red-400 dark:text-red-300"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-red-800 dark:text-red-200">
+                        There was an error with your submission
+                    </h3>
+                    <div class="mt-2 text-sm text-red-700 dark:text-red-300">
+                        <p>{{ data|safe }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <form class="mt-8 space-y-6" action="{% url 'RegisterAction' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="rounded-md shadow-sm space-y-4">
+                <div>
+                    <label for="id_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+                    <div class="relative mt-1">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-user text-gray-400"></i>
+                        </div>
+                        <input id="id_name" name="name" type="text" required class="appearance-none relative block w-full pl-10 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm" placeholder="Full Name">
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="id_username" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
+                    <div class="relative mt-1">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-at text-gray-400"></i>
+                        </div>
+                        <input id="id_username" name="username" type="text" required class="appearance-none relative block w-full pl-10 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm" placeholder="Username">
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="id_password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                    <div class="relative mt-1">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                        <input id="id_password" name="password" type="password" required class="appearance-none relative block w-full pl-10 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm" placeholder="Password">
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="id_contact" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contact</label>
+                    <div class="relative mt-1">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-phone text-gray-400"></i>
+                        </div>
+                        <input id="id_contact" name="contact" type="text" required class="appearance-none relative block w-full pl-10 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm" placeholder="Phone Number">
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="id_email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                    <div class="relative mt-1">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-envelope text-gray-400"></i>
+                        </div>
+                        <input id="id_email" name="email" type="email" required class="appearance-none relative block w-full pl-10 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm" placeholder="Email address">
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="id_address" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
+                    <div class="relative mt-1">
+                        <div class="absolute top-3 left-3 flex items-start pointer-events-none">
+                            <i class="fas fa-map-marker-alt text-gray-400"></i>
+                        </div>
+                        <textarea id="id_address" name="address" required class="appearance-none relative block w-full pl-10 py-3 border border-gray-300 dark:border-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white bg-white dark:bg-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm" placeholder="Your address" rows="3"></textarea>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="id_role" class="block text-sm font-medium text-gray-700 dark:text-gray-300">User Type</label>
+                    <div class="relative mt-1">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-user-tag text-gray-400"></i>
+                        </div>
+                        <select id="id_role" name="role" required class="appearance-none relative block w-full pl-10 py-3 pr-10 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white bg-white dark:bg-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm">
+                            <option value="FARMER">Farmer</option>
+                            <option value="DRS">Distributor/Retailer/Consumer</option>
+                            <option value="MILLER">Miller</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <i class="fas fa-chevron-down text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors duration-200">
+                    <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                        <i class="fas fa-user-plus text-primary-400 group-hover:text-primary-300"></i>
+                    </span>
+                    Register Account
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
